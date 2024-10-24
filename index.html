@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTuber Schnitzeljagd</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f4f4f4, #d9d9d9); /* Light Mode Hintergrund */
+            color: #333; /* Textfarbe im Light-Modus */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            transition: background 0.5s ease; /* Smooth transition für den Hintergrundwechsel */
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 400px; /* Breite der Box */
+            position: relative; /* Position für den Toggle-Switch */
+        }
+
+        .question {
+            display: none; /* Alle Fragen standardmäßig verstecken */
+        }
+
+        .question.active {
+            display: block; /* Nur aktive Frage anzeigen */
+        }
+
+        .hint-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: blue;
+            text-decoration: underline;
+        }
+.toggle-switch {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        /* Dark Mode Styles */
+        body.dark {
+            background-color: #333; /* Dunkelmodus Hintergrundfarbe */
+            color: #333; /* Textfarbe bleibt schwarz */
+        }
+
+        .dark .container {
+            background-color: #444; /* Dunkelere Hintergrundfarbe für den Container */
+        }
+
+        .dark .question {
+            color: #333; /* Textfarbe bleibt schwarz im Dunkelmodus */
+        }
+
+        /* Button Styles */
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Input Styles */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Start-Seite Styles */
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .start-screen h1 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .start-screen p {
+            margin-bottom: 15px;
+            line-height: 1.5; /* Bessere Lesbarkeit */
+        }
+
+        /* Video Styles */
+        video {
+            max-width: 100%; /* Video responsive */
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toggle Switch für Dark/Light Mode -->
+    <input type="checkbox" id="mode-switch">
+    <div class="toggle-switch">
+        <label for="mode-switch">Wechsel Dark/Light Mode</label>
+        <p>Sorry der geht nicht so richtig habe nicht mehr genugend Zeit xD</p>
+    </div>
+
+    <div class="container">
+        <!-- Startseite -->
+        <div class="start-screen active" id="start-screen">
+            <h1>Willkommen zur VTuber Fragen Schnitzeljagd!</h1>
+            <p>In dieser Schnitzeljagd wirst du eine Reihe von Fragen beantworten, diese wurden aus X(Twitter) Tweets genommen und sollen dann gesucht werden und beantwortet werden, die sich rund um German VTuber also um Lightmotiv drehen.</p>
+            <p>Du kannst einen Hinweis zu jeder Frage erhalten, wenn du nicht weiterkommst, dort kommst du zu dem richtigen Tweet wo die Lösung enthalten ist.</p>        <h1>Hinweis</h1> <p>Diese VTuber Schnitzeljagd wurde von <a href="https://twitch.tv/BenFrox" target="_blank">BenFrox</a> inheralb von 6 Stunden erstellt. Erwartet also bitte nicht zu viel, doch wenn euch diese kleine version von der Schnitzeljagd gefallen hat und ihr noch mehr ideen habt oder noch eine andere version davon haben wollt, schaut gerne in meinem Stream vorbei und gebt mir euer feedback. Da ich auch ein kleiner VTuber bin würde ich mich überer euren Support freuen und mein traum ist auch mal zu Lightmotif zu gehören.<a href="https://twitch.tv/BenFrox" target="_blank">Twitch</a></p>
+            <button onclick="startQuiz()">Start</button>
+        </div>
+
+        <!-- Fragen -->
+        <div class="question" id="q1">
+            <p>Wann hat Luny Geburtstag?</p>
+            <form>
+                <input type="text" id="answer1" required>
+                <button type="button" onclick="checkAnswer(1, '10.12.2001')">Weiter</button>
+            </form>
+            <a href="https://x.com/Lunywoo/status/1682409078000173057" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q2">
+            <p>Wer war das vierte Lightmotif-Mitglied?</p>
+            <form>
+                <input type="text" id="answer2" required>
+                <button type="button" onclick="checkAnswer(2, 'Jinja')">Weiter</button>
+            </form>
+            <a href="https://x.com/lightmotif_live/status/1611417085954899970" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q3">
+            <p>Wie heißt der Song, den Luny & Jinja zusammen am 10.02.2024 herausgebracht haben?</p>
+            <form>
+                <input type="text" id="answer3" required>
+                <button type="button" onclick="checkAnswer(3, 'Identity')">Weiter</button>
+            </form>
+            <a href="https://x.com/Lunywoo/status/1754516477443489921" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q4">
+            <p>Wann ist Luny Twitch Affiliate geworden?</p>
+            <form>
+                <input type="text" id="answer4" required>
+                <button type="button" onclick="checkAnswer(4, '27.06.2022')">Weiter</button>
+            </form>
+            <a href="https://x.com/Lunywoo/status/1541458490216046595" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q5">
+            <p>Was fehlt vor diesem Klo?</p>
+            <img src="Klo.png" alt="Bild eines Klos" style="max-width: 100%; border-radius: 5px;">
+            <form>
+                <input type="text" id="answer5" required>
+                <button type="button" onclick="checkAnswer(5, 'Klo Teppich')">Weiter</button>
+            </form>
+            <a href="https://x.com/Jinjaowo/status/1603012925966680064" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q6">
+            <p>Wann ist Luny Twitch Partnerin geworden?</p>
+            <form>
+                <input type="text" id="answer6" required>
+                <button type="button" onclick="checkAnswer(6, '12.10.2022')">Weiter</button>
+            </form>
+            <a href="https://x.com/Lunywoo/status/1580275862124888066" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q7">
+            <p>Rechne alle Zahlen zusammen, die auf der ersten Ausgabe von "Der Lightmotif Anzeiger" sind. (Wenn Zahlen durch einen Punkt . oder einen Doppelpunkt : getrennt sind, dann sind das neue Zahlen.)</p>
+            <img src="Zeitung.png" alt="Zeitung" style="max-width: 100%; border-radius: 5px;">
+            <a href="https://x.com/lightmotif_live/status/1842877483974000960" target="_blank" class="hint-link">Bild in groß vom Tweet</a>
+            <form>
+                <input type="text" id="answer7" required>
+                <button type="button" onclick="checkAnswer(7, '2138')">Weiter</button>
+            </form>
+        </div>
+
+        <div class="question" id="q8">
+            <p>Wer war der vorletzte, der von Lightmotif Twitch Partner wurde?</p>
+            <form>
+                <input type="text" id="answer8" required>
+                <button type="button" onclick="checkAnswer(8, 'EupheliaMona')">Weiter</button>
+            </form>
+            <a href="https://x.com/EupheliaMona/status/1638222093253746707" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+        
+        <div class="question" id="q9">
+            <p>Wann ist Luny YouTube Partner geworden?</p>
+            <form>
+                <input type="text" id="answer9" required>
+                <button type="button" onclick="checkAnswer(9, '17.05.2023')">Weiter</button>
+            </form>
+            <a href="https://x.com/Lunywoo/status/1658841303138926593" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q10">
+            <p>Wer war die letzte Person von Lightmotif, die Geburtstag hatte (Stand 25.10.2024)?</p>
+            <form>
+                <input type="text" id="answer10" required>
+                <button type="button" onclick="checkAnswer(10, 'Jinja')">Weiter</button>
+            </form>
+            <a href="https://x.com/lightmotif_live/status/1836761369212837957" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q11">
+            <p>Wie viel Geld wurde beim Spendenstream von Lightmotif "LightUP" gesammelt?</p>
+            <form>
+                <input type="text" id="answer11" required>
+                <button type="button" onclick="checkAnswer(11, '27.175€')">Weiter</button>
+            </form>
+            <a href="https://x.com/lightmotif_live/status/1759332416454365539" target="_blank" class="hint-link">Hinweis</a>
+        </div>
+
+        <div class="question" id="q12">
+            <p>Wie viel ergeben alle nicht ausgeschriebenen Zahlen zusammen?</p>
+            <div class="video-container">
+                <video controls>
+                    <source src="video.mp4" type="video/mp4" >
+                    Dein Browser unterstützt das Videoformat nicht.
+                </video>
+                <p>Achtung könnte laut werden ist aber nur auf 25% Lautsterke.</p>
+            </div>
+            <form>
+                <input type="text" id="answer12" required>
+                <button type="button" onclick="checkAnswer(12, '30')">Weiter</button>
+            </form>
+        </div>
+
+        <!-- Abschluss -->
+        <div class="question" id="finish">
+            <h2>Herzlichen Glückwunsch!</h2>
+            <p>Du hast alle Fragen beantwortet und die Schnitzeljagd erfolgreich abgeschlossen!</p>
+            <div class="question" id="finish">
+                <h2>Herzlichen Glückwunsch!</h2>
+                <p>Du hast alle Fragen beantwortet und die Schnitzeljagd erfolgreich abgeschlossen!</p>
+                <button onclick="restartQuiz()">Noch einmal spielen</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+
+        function startQuiz() {
+            const startScreen = document.getElementById("start-screen");
+            startScreen.style.opacity = "0";
+            setTimeout(() => {
+                startScreen.style.display = "none";
+            }, 500);
+            showQuestion(0); // Starte mit der ersten Frage (Index 0)
+        }
+
+        function showQuestion(index) {
+            const questions = document.querySelectorAll(".question");
+            questions.forEach(question => question.classList.remove("active"));
+
+            const currentQuestionElement = document.getElementById('q' + (index + 1));
+            if (currentQuestionElement) {
+                currentQuestionElement.classList.add("active");
+            } else {
+                document.getElementById('finish').classList.add('active');
+            }
+        }
+
+        function checkAnswer(questionNumber, correctAnswer) {
+            const userAnswer = document.getElementById('answer' + questionNumber).value.trim();
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                // Nächste Frage nach 1,5 Sekunden anzeigen
+                setTimeout(() => {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                }, 1500);
+            } else {
+                alert('Falsche Antwort. Versuch es noch einmal.');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.querySelector("video");
+            if (video) {
+                video.volume = 0.25;
+            }
+        });
+
+        // Dark/Light Mode Switch
+        const modeSwitch = document.getElementById('mode-switch');
+        modeSwitch.addEventListener('change', () => {
+            document.body.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>
